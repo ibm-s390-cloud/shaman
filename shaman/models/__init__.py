@@ -150,8 +150,8 @@ def flush():
     Session.flush()
 
 
-from projects import Project  # noqa
-from repos import Repo  # noqa
-from nodes import Node  # noqa
-from archs import Arch  # noqa
-from builds import Build  # noqa
+from shaman.models.projects import Project  # noqa
+from shaman.models.repos import Repo  # noqa
+from shaman.models.nodes import Node  # noqa
+from shaman.models.archs import Arch  # noqa
+from shaman.models.builds import Build  # noqa

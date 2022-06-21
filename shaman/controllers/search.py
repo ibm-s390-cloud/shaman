@@ -47,7 +47,7 @@ class SearchController(object):
                     return latest_modified_repos.filter_by(sha1=r.sha1).all()
 
                 for distro in distro_list:
-                    version_filter = distro["distro_codename"] or distro['distro_version']
+                    version_filter = distro['distro_version']
                     latest_repo = latest_modified_repos.filter(
                         Repo.sha1 == r.sha1,
                         Repo.distro_version == version_filter
@@ -88,7 +88,7 @@ class SearchController(object):
                 # for deb-based distros we store codename in the db as version,
                 # so try first with the codename, but fallback to
                 # distro_version otherwise
-                version_filter = distro["distro_codename"] or distro['distro_version']
+                version_filter = distro['distro_version']
                 if not version_filter:
                     abort(400, "Invalid version or codename for distro: %s" % distro["distro"])
                 repo_filters = [Repo.distro == distro["distro"], Repo.distro_version == version_filter]

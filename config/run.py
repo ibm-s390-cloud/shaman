@@ -5,7 +5,7 @@ from cherrypy import wsgiserver
 
 from pecan.deploy import deploy
 
-simpleapp_wsgi_app = deploy('dev.py')
+simpleapp_wsgi_app = deploy('config/dev.py')
 
 current_dir = os.path.abspath(dirname(__file__))
 base_dir = dirname(current_dir)
@@ -30,7 +30,7 @@ def make_static_config(static_dir_name):
             'tools.staticdir.dir': public_path
         }
     }
-    print configuration
+    print (configuration)
     return cherrypy.tree.mount(Root(), '/', config=configuration)
 
 
@@ -41,10 +41,10 @@ application = wsgiserver.WSGIPathInfoDispatcher({
     }
 )
 
-server = wsgiserver.CherryPyWSGIServer(('0.0.0.0', 8080), application, server_name='simpleapp')
+server = wsgiserver.CherryPyWSGIServer(('172.23.232.5', 8082), application, server_name='simpleapp')
 
 try:
     server.start()
 except KeyboardInterrupt:
-    print "Terminating server..."
+    print ("Terminating server...")
     server.stop()

@@ -4,8 +4,8 @@ from shaman import models
 
 # Server Specific Configurations
 server = {
-    'port': '8080',
-    'host': '0.0.0.0'
+    'port': '8082',
+    'host': '172.23.232.5'
 }
 
 # Pecan Application Configurations
@@ -59,7 +59,8 @@ logging = {
 }
 
 sqlalchemy_w = {
-    'url': 'sqlite:///dev.db',
+    # 'url': 'sqlite:///dev.db',
+    'url': 'postgresql+psycopg2://shaman:pass4root@127.0.0.1/shaman',
     'echo':          True,
     'echo_pool':     True,
     'pool_recycle':  3600,
@@ -67,7 +68,8 @@ sqlalchemy_w = {
 }
 
 sqlalchemy_ro = {
-    'url': 'sqlite:///dev.db',
+    # 'url': 'sqlite:///dev.db',
+    'url': 'postgresql+psycopg2://shaman:pass4root@127.0.0.1/shaman',
     'echo':          True,
     'echo_pool':     True,
     'pool_recycle':  3600,
