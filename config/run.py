@@ -41,7 +41,7 @@ application = wsgiserver.WSGIPathInfoDispatcher({
     }
 )
 
-server = wsgiserver.CherryPyWSGIServer(('172.23.232.5', 8082), application, server_name='simpleapp')
+server = wsgiserver.CherryPyWSGIServer(('172.23.232.4', 8082), application, server_name='simpleapp')
 
 try:
     server.start()
