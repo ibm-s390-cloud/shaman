@@ -5,7 +5,7 @@ from shaman import models
 # Server Specific Configurations
 server = {
     'port': '8082',
-    'host': '172.23.232.4'
+    'host': '172.23.230.157'
 }
 
 # Pecan Application Configurations
