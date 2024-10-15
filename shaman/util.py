@@ -84,6 +84,7 @@ def parse_distro_release(identifier, distro_name):
     """
     version_map = {
         'ubuntu': {
+            'noble': '24.04',
             'focal': '20.04',
             'bionic': '18.04',
             'xenial': '16.04',
@@ -101,6 +102,7 @@ def parse_distro_release(identifier, distro_name):
 
     codename_map = {
         'ubuntu': {
+            '24.04': 'noble',
             '20.04': 'focal',
             '18.04': 'bionic',
             '16.04': 'xenial',
