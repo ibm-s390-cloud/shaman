@@ -1,7 +1,8 @@
 import os
 from os.path import dirname
 import cherrypy
-from cherrypy import wsgiserver
+# from cherrypy import wsgiserver
+import wsgiserver
 
 from pecan.deploy import deploy
 
@@ -41,7 +42,7 @@ application = wsgiserver.WSGIPathInfoDispatcher({
     }
 )
 
-server = wsgiserver.CherryPyWSGIServer(('172.23.230.157', 8082), application, server_name='simpleapp')
+server = wsgiserver.CherryPyWSGIServer(('172.23.232.5', 8082), application, server_name='simpleapp')
 
 try:
     server.start()
