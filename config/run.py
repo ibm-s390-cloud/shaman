@@ -42,7 +42,7 @@ application = wsgiserver.WSGIPathInfoDispatcher({
     }
 )
 
-server = wsgiserver.WSGIServer(application, host='172.23.232.5', port=8082)
+server = wsgiserver.WSGIServer(application, host='172.18.228.156', port=8082)
 
 try:
     server.start()
