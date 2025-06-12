@@ -3,7 +3,7 @@ from sqlalchemy import Column, Integer, String, ForeignKey, DateTime
 from sqlalchemy.orm import relationship, backref, deferred
 from sqlalchemy.event import listen
 from sqlalchemy.orm.exc import DetachedInstanceError
-from shaman.models import Base, update_timestamp, publish_update_message
+from shaman.models import Base, update_timestamp
 from shaman.models.types import JSONType
 
 
@@ -18,7 +18,7 @@ class Repo(Base):
     flavor = Column(String(256), nullable=False, index=True, default="default")
     distro = Column(String(256), nullable=False, index=True)
     distro_version = Column(String(256), nullable=False, index=True)
-    modified = Column(DateTime, index=True)
+    modified = Column(DateTime(timezone=True), index=True)
     status = Column(String(256), index=True)
     extra = deferred(Column(JSONType()))
 
@@ -41,7 +41,7 @@ class Repo(Base):
 
     def __init__(self, project, **kwargs):
         self.project = project
-        self.modified = datetime.datetime.utcnow()
+        self.modified = datetime.datetime.now(datetime.timezone.utc)
         self.update_from_json(kwargs)
 
     @property
@@ -101,4 +101,3 @@ class Repo(Base):
 # listen for timestamp modifications
 listen(Repo, 'before_insert', update_timestamp)
 listen(Repo, 'before_update', update_timestamp)
-listen(Repo, 'after_update', publish_update_message)

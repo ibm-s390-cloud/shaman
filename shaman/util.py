@@ -1,6 +1,5 @@
 import os
 import requests
-import pika
 from requests.exceptions import BaseHTTPError, RequestException
 import datetime
 import logging
@@ -24,7 +23,7 @@ def get_next_node():
     )
     for node in nodes:
         if is_node_healthy(node):
-            node.last_used = datetime.datetime.utcnow()
+            node.last_used = datetime.datetime.now(datetime.timezone.utc)
             models.commit()
             logger.info("node: %s was chosen as the next in rotation", node.host)
             return node
@@ -194,28 +193,3 @@ def get_repo_url(query, arch, path=None, repo_file=True):
         # yum or apt repo file
         repo_url = os.path.join(repo.chacra_url, 'repo')
     return repo_url
-
-
-def publish_message(routing_key, body):
-    """
-    Publishes a message to RabbitMQ
-    """
-    credentials = pika.PlainCredentials(conf.RABBIT_USER, conf.RABBIT_PW)
-    connection = pika.BlockingConnection(pika.ConnectionParameters(
-        host=conf.RABBIT_HOST,
-        credentials=credentials
-    ))
-    channel = connection.channel()
-    channel.exchange_declare(
-        exchange="shaman",
-        exchange_type="topic",
-    )
-
-    properties = pika.BasicProperties(content_type='application/json')
-    channel.basic_publish(
-        exchange="shaman",
-        routing_key=routing_key,
-        body=body,
-        properties=properties,
-    )
-    connection.close()
