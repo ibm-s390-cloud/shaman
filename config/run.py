@@ -3,6 +3,8 @@ from os.path import dirname
 import cherrypy
 from cheroot import wsgi
 
+import wsgiserver
+
 from pecan.deploy import deploy
 
 
