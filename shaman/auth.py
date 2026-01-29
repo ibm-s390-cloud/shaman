@@ -14,9 +14,9 @@ def basic_auth():
 
     #     assert username == conf.api_user
     #     assert password == conf.api_key
-    # except:
-    #     response.headers['WWW-Authenticate'] = 'Basic realm="Shaman :: API"'
-    #     abort(401)
+    except:
+        response.headers['WWW-Authenticate'] = 'Basic realm="Shaman :: API"'
+        abort(401)
 
     return True
 
